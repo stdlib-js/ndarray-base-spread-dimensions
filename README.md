@@ -45,32 +45,14 @@ limitations under the License.
 
 <!-- Package usage documentation. -->
 
-<section class="installation">
 
-## Installation
-
-```bash
-npm install @stdlib/ndarray-base-spread-dimensions
-```
-
-Alternatively,
-
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-var spreadDimensions = require( '@stdlib/ndarray-base-spread-dimensions' );
+import spreadDimensions from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@deno/mod.js';
 ```
 
 #### spreadDimensions( ndims, x, dims )
@@ -78,8 +60,8 @@ var spreadDimensions = require( '@stdlib/ndarray-base-spread-dimensions' );
 Expands the shape of an array to a specified dimensionality by spreading its dimensions to specified dimension indices and inserting dimensions of size one for the remaining dimensions.
 
 ```javascript
-var ndarray2array = require( '@stdlib/ndarray-to-array' );
-var array = require( '@stdlib/ndarray-array' );
+import ndarray2array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@deno/mod.js';
+import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@deno/mod.js';
 
 // Create a 2x2 ndarray:
 var x = array( [ [ 1, 2 ], [ 3, 4 ] ] );
@@ -142,10 +124,10 @@ a = ndarray2array( y );
 <!-- eslint no-undef: "error" -->
 
 ```javascript
-var array = require( '@stdlib/ndarray-array' );
-var numel = require( '@stdlib/ndarray-base-numel' );
-var ind2sub = require( '@stdlib/ndarray-ind2sub' );
-var spreadDimensions = require( '@stdlib/ndarray-base-spread-dimensions' );
+import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@deno/mod.js';
+import numel from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-numel@deno/mod.js';
+import ind2sub from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-ind2sub@deno/mod.js';
+import spreadDimensions from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@deno/mod.js';
 
 // Create a 2-dimensional array:
 var x = array( [ [ 1, 2 ], [ 3, 4 ] ], {
@@ -200,7 +182,7 @@ for ( i = 0; i < N; i++ ) {
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
