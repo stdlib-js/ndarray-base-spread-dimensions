@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2025 The Stdlib Authors.
@@ -16,16 +16,28 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
+
+import { ndarray } from '@stdlib/types/ndarray';
+import { Collection } from '@stdlib/types/array';
 
 /**
-* Expand the shape of an array to a specified dimensionality by spreading its dimensions to specified dimension indices and inserting dimensions of size one for the remaining dimensions.
+* Expands the shape of an array to a specified dimensionality by spreading its dimensions to specified dimension indices and inserting dimensions of size one for the remaining dimensions.
 *
-* @module @stdlib/ndarray-base-spread-dimensions
+* ## Notes
+*
+* -   Each provided dimension index must reside on the interval `[-ndims, ndims-1]`. If provided a negative dimension index, the position at which to place a respective dimension is computed as `ndims + index`.
+* -   Provided dimension indices must resolve to normalized dimension indices arranged in ascending order.
+*
+* @param ndims - number of dimensions in the output array
+* @param x - input array
+* @param dims - dimension indices
+* @returns output array
 *
 * @example
 * var array = require( '@stdlib/ndarray-array' );
-* var spreadDimensions = require( '@stdlib/ndarray-base-spread-dimensions' );
 *
 * var x = array( [ [ 1, 2 ], [ 3, 4 ] ] );
 * // returns <ndarray>
@@ -51,12 +63,9 @@
 * v = y.get( 0, 1, 0, 1, 0 );
 * // returns 4
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function spreadDimensions<T extends ndarray>( ndims: number, x: T, dims: Collection<number> ): T;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = spreadDimensions;
