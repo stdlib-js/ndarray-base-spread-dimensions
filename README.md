@@ -45,41 +45,35 @@ limitations under the License.
 
 <!-- Package usage documentation. -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/ndarray-base-spread-dimensions
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-spreadDimensions = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@umd/browser.js' )
+var spreadDimensions = require( '@stdlib/ndarray-base-spread-dimensions' );
 ```
 
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var spreadDimensions = require( 'path/to/vendor/umd/ndarray-base-spread-dimensions/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.spreadDimensions;
-})();
-</script>
-```
-
-#### spreadDimensions( ndims, x, dims )
+#### spreadDimensions( ndims, x, dims, writable )
 
 Expands the shape of an array to a specified dimensionality by spreading its dimensions to specified dimension indices and inserting dimensions of size one for the remaining dimensions.
 
@@ -92,7 +86,7 @@ var x = array( [ [ 1, 2 ], [ 3, 4 ] ] );
 // returns <ndarray>
 
 // Prepend a singleton dimension:
-var y = spreadDimensions( 3, x, [ 1, 2 ] );
+var y = spreadDimensions( 3, x, [ 1, 2 ], false );
 // returns <ndarray>
 
 var sh = y.shape;
@@ -102,7 +96,7 @@ var a = ndarray2array( y );
 // returns [ [ [ 1, 2 ], [ 3, 4 ] ] ]
 
 // Append a singleton dimension:
-y = spreadDimensions( 3, x, [ 0, 1 ] );
+y = spreadDimensions( 3, x, [ 0, 1 ], false );
 // returns <ndarray>
 
 sh = y.shape;
@@ -112,7 +106,7 @@ a = ndarray2array( y );
 // returns [ [ [ 1 ], [ 2 ] ], [ [ 3 ], [ 4 ] ] ]
 
 // Insert a singleton dimension:
-y = spreadDimensions( 3, x, [ 0, 2 ] );
+y = spreadDimensions( 3, x, [ 0, 2 ], false );
 // returns <ndarray>
 
 sh = y.shape;
@@ -121,6 +115,13 @@ sh = y.shape;
 a = ndarray2array( y );
 // returns [ [ [ 1, 2 ] ], [ [ 3, 4 ] ] ]
 ```
+
+The function accepts the following arguments:
+
+-   **ndims**: number of dimensions in the output ndarray. Must be greater than or equal to the number of dimensions in the input ndarray.
+-   **x**: input ndarray.
+-   **dims**: dimension indices specifying where to place the dimensions of the input ndarray. Must resolve to normalized indices arranged in ascending order.
+-   **writable**: boolean indicating whether a returned ndarray should be writable.
 
 </section>
 
@@ -134,6 +135,7 @@ a = ndarray2array( y );
 
 -   Each provided dimension index must reside on the interval `[-ndims, ndims-1]`. If provided a negative dimension index, the position at which to place a respective dimension is computed as `ndims + index`.
 -   Provided dimension indices must resolve to normalized dimension indices arranged in ascending order.
+-   The `writable` parameter **only** applies to ndarray constructors supporting **read-only** instances.
 
 </section>
 
@@ -147,16 +149,11 @@ a = ndarray2array( y );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-numel@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-ind2sub@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var array = require( '@stdlib/ndarray-array' );
+var numel = require( '@stdlib/ndarray-base-numel' );
+var ind2sub = require( '@stdlib/ndarray-ind2sub' );
+var spreadDimensions = require( '@stdlib/ndarray-base-spread-dimensions' );
 
 // Create a 2-dimensional array:
 var x = array( [ [ 1, 2 ], [ 3, 4 ] ], {
@@ -165,7 +162,7 @@ var x = array( [ [ 1, 2 ], [ 3, 4 ] ], {
 // returns <ndarray>
 
 // Spread dimensions:
-var y = spreadDimensions( 5, x, [ 1, 3 ] );
+var y = spreadDimensions( 5, x, [ 1, 3 ], false );
 // returns <ndarray>
 
 // Retrieve the shape:
@@ -180,11 +177,6 @@ var i;
 for ( i = 0; i < N; i++ ) {
     console.log( 'Y[%s] = %d', ind2sub( sh, i ).join( ', ' ), y.iget( i ) );
 }
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -259,8 +251,8 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 -->
 
-[chat-image]: https://img.shields.io/gitter/room/stdlib-js/stdlib.svg
-[chat-url]: https://app.gitter.im/#/room/#stdlib-js_stdlib:gitter.im
+[chat-image]: https://img.shields.io/badge/zulip-join_chat-brightgreen.svg
+[chat-url]: https://stdlib.zulipchat.com
 
 [stdlib]: https://github.com/stdlib-js/stdlib
 
