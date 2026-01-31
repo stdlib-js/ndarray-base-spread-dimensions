@@ -52,7 +52,7 @@ limitations under the License.
 ## Usage
 
 ```javascript
-import spreadDimensions from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@deno/mod.js';
+import spreadDimensions from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@v0.1.0-deno/mod.js';
 ```
 
 #### spreadDimensions( ndims, x, dims, writable )
@@ -135,7 +135,7 @@ The function accepts the following arguments:
 import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@deno/mod.js';
 import numel from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-numel@deno/mod.js';
 import ind2sub from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-ind2sub@deno/mod.js';
-import spreadDimensions from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@deno/mod.js';
+import spreadDimensions from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-spread-dimensions@v0.1.0-deno/mod.js';
 
 // Create a 2-dimensional array:
 var x = array( [ [ 1, 2 ], [ 3, 4 ] ], {
