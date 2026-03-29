@@ -78,42 +78,33 @@ var spreadDimensions = require( '@stdlib/ndarray-base-spread-dimensions' );
 Expands the shape of an array to a specified dimensionality by spreading its dimensions to specified dimension indices and inserting dimensions of size one for the remaining dimensions.
 
 ```javascript
-var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var getShape = require( '@stdlib/ndarray-shape' );
 var array = require( '@stdlib/ndarray-array' );
 
 // Create a 2x2 ndarray:
 var x = array( [ [ 1, 2 ], [ 3, 4 ] ] );
-// returns <ndarray>
+// returns <ndarray>[ [ 1, 2 ], [ 3, 4 ] ]
 
 // Prepend a singleton dimension:
 var y = spreadDimensions( 3, x, [ 1, 2 ], false );
-// returns <ndarray>
+// returns <ndarray>[ [ [ 1, 2 ], [ 3, 4 ] ] ]
 
-var sh = y.shape;
+var sh = getShape( y );
 // returns [ 1, 2, 2 ]
-
-var a = ndarray2array( y );
-// returns [ [ [ 1, 2 ], [ 3, 4 ] ] ]
 
 // Append a singleton dimension:
 y = spreadDimensions( 3, x, [ 0, 1 ], false );
-// returns <ndarray>
+// returns <ndarray>[ [ [ 1 ], [ 2 ] ], [ [ 3 ], [ 4 ] ] ]
 
-sh = y.shape;
+sh = getShape( y );
 // returns [ 2, 2, 1 ]
-
-a = ndarray2array( y );
-// returns [ [ [ 1 ], [ 2 ] ], [ [ 3 ], [ 4 ] ] ]
 
 // Insert a singleton dimension:
 y = spreadDimensions( 3, x, [ 0, 2 ], false );
-// returns <ndarray>
+// returns <ndarray>[ [ [ 1, 2 ] ], [ [ 3, 4 ] ] ]
 
-sh = y.shape;
+sh = getShape( y );
 // returns [ 2, 1, 2 ]
-
-a = ndarray2array( y );
-// returns [ [ [ 1, 2 ] ], [ [ 3, 4 ] ] ]
 ```
 
 The function accepts the following arguments:
@@ -151,6 +142,7 @@ The function accepts the following arguments:
 
 ```javascript
 var array = require( '@stdlib/ndarray-array' );
+var getShape = require( '@stdlib/ndarray-shape' );
 var numel = require( '@stdlib/ndarray-base-numel' );
 var ind2sub = require( '@stdlib/ndarray-ind2sub' );
 var spreadDimensions = require( '@stdlib/ndarray-base-spread-dimensions' );
@@ -166,7 +158,7 @@ var y = spreadDimensions( 5, x, [ 1, 3 ], false );
 // returns <ndarray>
 
 // Retrieve the shape:
-var sh = y.shape;
+var sh = getShape( y );
 // returns [ 1, 2, 1, 2, 1 ]
 
 // Retrieve the number of elements:
@@ -238,8 +230,8 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 [npm-image]: http://img.shields.io/npm/v/@stdlib/ndarray-base-spread-dimensions.svg
 [npm-url]: https://npmjs.org/package/@stdlib/ndarray-base-spread-dimensions
 
-[test-image]: https://github.com/stdlib-js/ndarray-base-spread-dimensions/actions/workflows/test.yml/badge.svg?branch=v0.1.1
-[test-url]: https://github.com/stdlib-js/ndarray-base-spread-dimensions/actions/workflows/test.yml?query=branch:v0.1.1
+[test-image]: https://github.com/stdlib-js/ndarray-base-spread-dimensions/actions/workflows/test.yml/badge.svg?branch=main
+[test-url]: https://github.com/stdlib-js/ndarray-base-spread-dimensions/actions/workflows/test.yml?query=branch:main
 
 [coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/ndarray-base-spread-dimensions/main.svg
 [coverage-url]: https://codecov.io/github/stdlib-js/ndarray-base-spread-dimensions?branch=main
